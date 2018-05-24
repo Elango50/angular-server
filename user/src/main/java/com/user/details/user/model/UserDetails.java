@@ -4,6 +4,17 @@ public class UserDetails {
 
 	private int id;
 
+	private String name;
+	private String department;
+	private int salary;
+
+	public UserDetails(int id, String name, String department, int salary) {
+		this.id = id;
+		this.name = name;
+		this.department = department;
+		this.salary = salary;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -35,10 +46,6 @@ public class UserDetails {
 	public void setSalary(int salary) {
 		this.salary = salary;
 	}
-
-	private String name;
-	private String department;
-	private int salary;
 
 
 }
