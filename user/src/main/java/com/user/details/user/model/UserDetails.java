@@ -1,15 +1,23 @@
 package com.user.details.user.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "userdetails")
 public class UserDetails {
 
+	@Id
+	@GeneratedValue
 	private int id;
 
 	private String name;
 	private String department;
 	private int salary;
 
-	public UserDetails(int id, String name, String department, int salary) {
-		this.id = id;
+	public UserDetails(String name, String department, int salary) {
 		this.name = name;
 		this.department = department;
 		this.salary = salary;

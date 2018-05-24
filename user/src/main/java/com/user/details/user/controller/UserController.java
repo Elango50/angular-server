@@ -2,8 +2,10 @@ package com.user.details.user.controller;
 
 
 import com.user.details.user.model.UserDetails;
+import com.user.details.user.service.dao.UserDetailsService;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,9 +22,14 @@ import java.util.List;
 @RestController
 public class UserController {
 
+
+    @Autowired
+    private UserDetailsService userDetailsService;
+
     @GetMapping("/users/{name}")
     public List<UserDetails> getUserDetails(@PathVariable String name) {
         System.out.println("get User called.....");
+
         return getRepoDetails(name);
     }
 
@@ -62,7 +69,7 @@ public class UserController {
             }
 
             for (int i = 0; i < stringArray.size(); i++) {
-                userDetail.add(new UserDetails(stringArray.get(i).getInt("id"),
+                userDetail.add(new UserDetails(
                         stringArray.get(i).getString("name"),
                         stringArray.get(i).getString("full_name"),
                         stringArray.get(i).getInt("open_issues")));
@@ -72,6 +79,9 @@ public class UserController {
             System.out.println(userDetail);
 
             conn.disconnect();
+
+            //addded the user details
+            userDetailsService.addUser(userDetail.get(0));
 
             return userDetail;
 
